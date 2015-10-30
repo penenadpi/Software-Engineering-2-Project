@@ -2421,9 +2421,9 @@
 <XPD:REF name="Model">8oof939370K3qKlyfMBYIQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="EdgeLabelView" guid="2+zFTnHxIESDvKirsB4H6AAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">30</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">&lt;&lt;initiate&gt;&gt;</XPD:ATTR>
 <XPD:REF name="Model">8oof939370K3qKlyfMBYIQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="PropertyLabel" type="EdgeLabelView" guid="h37w7L7rWkehdPJ0nsgUkQAA">
@@ -6495,7 +6495,6 @@
 <XPD:REF name="Includers[1]">dOfIqi65mEmUi13fnu0ZPwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[64]" type="UMLAssociation" guid="8oof939370K3qKlyfMBYIQAA">
-<XPD:ATTR name="StereotypeName" type="string">initiate</XPD:ATTR>
 <XPD:REF name="Namespace">13wCKfHZuUegYPd9YC0JawAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">IWpm/HCYbEGR6MoB+rOo1QAA</XPD:REF>
