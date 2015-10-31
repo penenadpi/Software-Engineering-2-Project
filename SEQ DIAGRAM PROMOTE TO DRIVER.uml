@@ -103,7 +103,7 @@
 <XPD:ATTR name="Left" type="integer">56</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">340</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">688</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">424</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">345</XPD:ATTR>
 <XPD:REF name="Model">j3Ho3NaRykelpE/n0rKF3QAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="keshm6hJfEih7uRQNaOEFAAA">
 <XPD:ATTR name="Text" type="string">users!=null</XPD:ATTR>

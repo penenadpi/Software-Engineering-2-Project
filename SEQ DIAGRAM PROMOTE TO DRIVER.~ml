@@ -220,7 +220,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="BRPEhAfVeUqeDbvXV6fhXwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="rXA7ke5pTUiZ6LyGSp432gAA">
 <XPD:ATTR name="FontStyle" type="integer">4</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">User database</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Database</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="VlhI1eCm2EiERa1hxDy2YgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -1165,7 +1165,7 @@
 <XPD:REF name="ReceivingStimuli[2]">aLcdfYWdi0i2y4kb4QBaXgAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingInstances[9]" type="UMLObject" guid="5e/yFWGhp0iEtk6DqBUM4wAA">
-<XPD:ATTR name="Name" type="string">User database</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Database</XPD:ATTR>
 <XPD:REF name="CollaborationInstanceSet">Xuu14WP3A0S1vT3kz3O/9wAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
 <XPD:REF name="Views[0]">CCWRCkQItk2CSYEzbvVsaQAA</XPD:REF>
