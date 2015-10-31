@@ -109,7 +109,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="Isnx5fybSECzKz6o4GKRgwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="IEiYFyzBC0OJExJZVrGuvgAA">
 <XPD:ATTR name="FontStyle" type="integer">4</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Nenad : User</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Alice : User</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="Bq2R72VUVEaJtVrRDfHnxQAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -654,7 +654,7 @@
 </XPD:OBJ>
 <XPD:ATTR name="#ParticipatingInstances" type="integer">10</XPD:ATTR>
 <XPD:OBJ name="ParticipatingInstances[0]" type="UMLObject" guid="jG+DisFqjUiUD5B0SquqYwAA">
-<XPD:ATTR name="Name" type="string">Nenad</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Alice</XPD:ATTR>
 <XPD:REF name="Classifier">MjaTRyHCbEmpfCw8MnoiMgAA</XPD:REF>
 <XPD:REF name="CollaborationInstanceSet">Xuu14WP3A0S1vT3kz3O/9wAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
