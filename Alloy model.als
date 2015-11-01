@@ -1,3 +1,9 @@
+//1.SIGNATURES
+
+
+
+
+
 //DATATYPES SIGNATURES
 //Here are the signatures of the datatypes used in the domain of the problem itself
 sig Time{
@@ -93,5 +99,52 @@ sig Scheduler{
 requestQueue: set Request
 zones: some TaxiZone
 }
+
+
+
+
+//2.FACTS
+
+
+
+
+
+//noEmpty-alike facts
+
+fact noEmptyTime{
+	all t:Time | (#t.hours=1) and (#t.minutes=1)
+}
+
+
+fact noEmptyDate{
+	all d: Date | (#d.day=1) and (#d.month=1) and (#d.year=1)
+}
+
+fact noEmptyTimeDate{
+	all td:TimeDate (#td.timeStamp=1) and (#td.dateStamp=1)
+}
+
+fact noEmptyLocation{
+	all l:Location (#l.coordinates=1) and (#l.streetName=1) and (#l.streetNumber=1)
+}
+
+
+//no duplicate users
+fact noDuplicateUser{
+	no disj u1,u2: User | (u1.username=u2.username)
+}
+
+//no self-communication
+
+fact noSelfCommunication{
+	all u:User, m:Message | not ( (m.sender=u1) and (m.receiver=u1) )
+}
+
+//no driving to same destination 
+
+fact noSameStartAsEnd{
+	all m:Message | not ( m.startpoint=m.endpoint )
+}
+
 
 
