@@ -1,17 +1,14 @@
 //DATATYPES SIGNATURES
 //Here are the signatures of the datatypes used in the domain of the problem itself
-sig Integer{}
-sig Strings{}
-
 sig Time{
-hours: one integer,
-minutes: one integer
+hours: one Int,
+minutes: one Int
 }
 
 sig Date{
-day: one Integer,
-month: one Integer,
-year: one Integer
+day: one Int,
+month: one Int,
+year: one Int
 }
 
 sig TimeDate{
@@ -20,7 +17,46 @@ dayStamp: one Date
 }
 
 sig Location {
-coordinates: one Strings,
-streetName: one Strings,
-number:one Integer
+coordinates: one String,
+streetName: one String,
+number:one Int
 }
+
+//ENTITY SIGNATURES
+//Here are the signatures of the entities that are used in this model
+
+
+//People that use application
+abstract sig Visitor{}
+
+sig Guest extends Visitor{}
+
+sig User extends Visitor{
+firstname: one String,
+lastname: one String,
+username:one String,
+password:one String,
+mobilephoneNumber: one String,
+gender: one String,
+picturePath: one String
+}
+
+sig Admin extends Visitor{
+username: one String,
+password: one String
+}
+
+//Communication entities
+
+Message{
+startpoint:one Location,
+endpoint: one Location,
+
+}
+
+
+
+
+
+
+
