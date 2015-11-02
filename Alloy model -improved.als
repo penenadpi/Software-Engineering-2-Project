@@ -109,6 +109,7 @@ reason: one Strings
 
 
 sig Drive{
+driveId: one Strings,
 userRequest: one Request,
 taxiResponse:one Response,
 reports: some Report
@@ -206,4 +207,9 @@ fact noSameLicense{
 	no disj td1,td2: TaxiDriver | not (td1.licenseNumber=td2.licenseNumber)
 }
 
+//no two drives with same ids
+
+fact noSameDriveId{
+	no disj d1,d2: Drive | not (drive1.driveId=d2.driveId)
+}
 
