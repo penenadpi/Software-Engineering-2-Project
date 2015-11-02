@@ -184,10 +184,20 @@ fact noUnlicensedAndCarlessTaxiDriver{
 
 
 
-//no duplicate users
+//no duplicate usernames
 fact noDuplicateUser{
 	no disj u1,u2: User | (u1.username=u2.username)
 }
+
+//no possibility for one user to register more than once
+
+
+fact noFakeProfiles{
+	no disj u1,u2: User | (u1.codiceFiscale=u2.codiceFiscale)
+}
+
+
+
 
 //no self-communication
 
