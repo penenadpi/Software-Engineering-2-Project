@@ -70,7 +70,8 @@ mobilephoneNumber: one String,
 gender: one Character,
 picturePath: one String,
 currentLocation:one Location,
-currentZone:one TaxiZone
+currentZone:one TaxiZone,
+codiceFiscale: one String
 }
 
 

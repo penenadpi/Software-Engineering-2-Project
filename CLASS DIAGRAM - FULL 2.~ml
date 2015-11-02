@@ -2760,9 +2760,14 @@
 <XPD:REF name="Associations[5]">oX0qCuiJDE6wNap2qcK2lwAA</XPD:REF>
 <XPD:REF name="Associations[6]">kNsxG6SqL0OWDjv3FuFy4wAA</XPD:REF>
 <XPD:REF name="Associations[7]">7XyGMQKUFk6P0Ou8/M9iQgAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="#Attributes" type="integer">2</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="q4eKeL1bkEuYr5x/SRGetwAA">
 <XPD:ATTR name="Name" type="string">reason</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">String</XPD:ATTR>
+<XPD:REF name="Owner">cIkDo+VGmEGIcpSQLRj64wAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[1]" type="UMLAttribute" guid="e/bfW258ukaZAkKN4eyxKAAA">
+<XPD:ATTR name="Name" type="string">id</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">String</XPD:ATTR>
 <XPD:REF name="Owner">cIkDo+VGmEGIcpSQLRj64wAA</XPD:REF>
 </XPD:OBJ>
