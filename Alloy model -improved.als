@@ -11,28 +11,30 @@
 //common datatypes definitions for types oftenly found in programming languages and necessary for this
 //problem
 
-sig Character{
-}
-
-sig Integer{
-}
-
-sig Strings{
-}
 
 
 
 //Here are the signatures of the datatypes used in the domain of the problem itself
 
 sig Time{
-hours: one Integer,
-minutes: one Integer
+hours: one Int,
+minutes: one Int
+}{
+hours>=0
+hours<24
+minutes>=0
+minutes<60
 }
 
 sig Date{
-day: one Integer,
-month: one Integer,
-year: one Integer
+day: one Int,
+month: one Int,
+year: one Int
+}{
+day>0
+day<=31
+month>0
+month<=12
 }
 
 sig TimeDate{
@@ -41,13 +43,13 @@ dayStamp: one Date
 }
 
 sig Location {
-coordinates: one Strings,
-streetName: one Strings,
-number:one Integer
+coordinates: one String,
+streetName: one String,
+number:one Int
 }
 
 sig CarNumber{
-id: one Strings
+id: one String
 }
 
 //ENTITY SIGNATURES
@@ -60,27 +62,29 @@ abstract sig Visitor{}
 sig Guest extends Visitor{}
 
 sig User extends Visitor{
-firstname: one Strings,
-lastname: one Strings,
-username:one Strings,
-password:one Strings,
-mobilephoneNumber: one Strings,
+firstname: one String,
+lastname: one String,
+username:one String,
+password:one String,
+mobilephoneNumber: one String,
 gender: one Character,
-picturePath: one String
+picturePath: one String,
+currentLocation:one Location,
+currentZone:one TaxiZone
 }
 
 
 sig TaxiDriver extends User{
 carId:one CarNumber,
-licenseNumber:one Strings,
-carModel:one Strings,
-availability:one Character
+licenseNumber:one String,
+carModel:one String,
+availability:one String,
 
 }
 
 sig Admin extends Visitor{
-username: one Strings,
-password: one Strings
+username: one String,
+password: one String
 }
 
 //Communication entities
@@ -97,6 +101,10 @@ receiver:one User
 sig Request extends Message{
 maximumWaitingTime: lone Time
 }
+{
+maximumWaitingTime.hours=23
+maximumWaitingTime.minutes=59
+}
 
 sig Response extends Message{
 accepted:one Strings,
@@ -104,21 +112,22 @@ estimatedTimeWaiting:one Time
 }
 
 sig Report extends Message{
-reason: one Strings
+reason: one String,
+id:  one String
 }
 
 
 sig Drive{
-driveId: one Strings,
+driveId: one String,
 userRequest: one Request,
 taxiResponse:one Response,
-reports: some Report
+reports: set Report
 }
 
 
 //System-related entities
 sig TaxiZone{
-carIdQueue: some CarNumber,
+carIdQueue: set CarNumber,
 centerPoint: one Location
 }
 
@@ -211,5 +220,49 @@ fact noSameLicense{
 
 fact noSameDriveId{
 	no disj d1,d2: Drive | not (drive1.driveId=d2.driveId)
+}
+
+
+//a taxi drivers can respond to requests that are from users in that taxizone
+
+
+fact responseCondition1{
+no r:Request | r.sender. currentZone!=r.receiver.currentZone
+}
+
+fact responseCondition2{
+no r:Response | r.sender. currentZone!=r.receiver.currentZone
+}
+
+
+
+
+//no longer estimated time in response than time proposed in a request. this can't be a drive formed event
+
+fact timesCondition {
+ no d: Drive | (d.userRequest.maximumWaitingTime.minutes) < (d.taxiResponse.estimatedTimeWaiting.minutes)
+}
+
+//since we assume that the areas are at most 2km square each, we won't allow waiting times in hours in this case
+
+fact timesCondition2{
+no d:Drive | (d.userRequest.maximumWaitingTime.hours>0)
+}
+
+
+fact timesCondition3{
+no d:Drive | (d.taxiResponse.estimatedTimeWaiting.hours>0)
+}
+
+
+
+
+
+//no one taxi in two different taxi zones
+
+fact oneTaxiCanOnlyBeInOneTaxiZone {
+ no t: TaxiDriver | some z1, z2:TaxiZone |
+ z1!=z2 and (t.carId in z1.carIdQueue) and
+ (t.carId in z2.carIdQueue)
 }
 
