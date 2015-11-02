@@ -106,7 +106,7 @@
 <XPD:ATTR name="Height" type="integer">229</XPD:ATTR>
 <XPD:REF name="Model">I4TaRGhil0yRC4rvRcZGGwAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="3gw4ePwjOUy4Ueg5Xl7LHgAA">
-<XPD:ATTR name="Text" type="string">[response=='y']</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">[response=='y' and max_waiting_time&gt;estimated_time] </XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="FrameTypeLabel" type="LabelView" guid="PHMrsW0eCEua7mAU47SBHAAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
@@ -116,9 +116,9 @@
 <XPD:OBJ name="OwnedViews[1]" type="UMLFrameView" guid="hjdqa2sMPk2BGy4pim6X/wAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">176</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">308</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">364</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">513</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">381</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">133</XPD:ATTR>
 <XPD:REF name="Model">uZ3i2q0E6Uy5il8IzSdPhQAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="WpQTsAXaTEejgpcQC7jWBgAA">
@@ -922,7 +922,7 @@
 </XPD:OBJ>
 <XPD:ATTR name="#OwnedFrames" type="integer">2</XPD:ATTR>
 <XPD:OBJ name="OwnedFrames[0]" type="UMLFrame" guid="I4TaRGhil0yRC4rvRcZGGwAA">
-<XPD:ATTR name="Name" type="string">[response=='y']</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">[response=='y' and max_waiting_time&gt;estimated_time] </XPD:ATTR>
 <XPD:ATTR name="FrameKind" type="string">if</XPD:ATTR>
 <XPD:REF name="InteractionInstanceSet">QCki0+UCnkCTH0cbRkVLbwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">1</XPD:ATTR>
