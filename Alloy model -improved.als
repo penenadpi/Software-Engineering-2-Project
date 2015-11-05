@@ -128,6 +128,7 @@ reports: set Report
 
 //System-related entities
 sig TaxiZone{
+zone id: one String,
 carIdQueue: set CarNumber,
 centerPoint: one Location
 }
