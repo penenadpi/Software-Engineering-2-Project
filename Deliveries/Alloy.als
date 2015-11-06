@@ -11,45 +11,38 @@
 //common datatypes definitions for types oftenly found in programming languages and necessary for this
 //problem
 
+sig Strings{}
+sig Char{}
+sig Integer{}
 
 
-
-//Here are the signatures of the datatypes used in the domain of the problem itself
+//Here are the signatures of the datatypes used in the domain of the problem itself in terms of time and space
 
 sig Time{
-hours: one Int,
-minutes: one Int
-}{
-hours>=0
-hours<24
-minutes>=0
-minutes<60
+hours: one Integer,
+minutes: one Integer
 }
 
 sig Date{
-day: one Int,
-month: one Int,
-year: one Int
-}{
-day>0
-day<=31
-month>0
-month<=12
+day: one Integer,
+month: one Integer,
+year: one Integer
 }
 
 sig TimeDate{
 timeStamp: one Time,
-dayStamp: one Date
+dateStamp: one Date
 }
 
 sig Location {
-coordinates: one String,
-streetName: one String,
-number:one Int
+coordinates: one Strings,
+streetName: one Strings,
+streetNumber:one Integer
 }
 
 sig CarNumber{
-id: one String
+id: one Strings
+//owner: one TaxiDriver
 }
 
 //ENTITY SIGNATURES
@@ -62,30 +55,30 @@ abstract sig Visitor{}
 sig Guest extends Visitor{}
 
 sig User extends Visitor{
-firstname: one String,
-lastname: one String,
-username:one String,
-password:one String,
-mobilephoneNumber: one String,
-gender: one Character,
-picturePath: one String,
+firstname: one Strings,
+lastname: one Strings,
+username:one Strings,
+password:one Strings,
+mobilephoneNumber: one Strings,
+gender: one Char,
+picturePath: one Strings,
 currentLocation:one Location,
 currentZone:one TaxiZone,
-codiceFiscale: one String
+codiceFiscale: one Strings
 }
 
 
 sig TaxiDriver extends User{
 carId:one CarNumber,
-licenseNumber:one String,
-carModel:one String,
-availability:one String,
-
+licenseNumber:one Strings,
+carModel:one Strings,
+availability:one Char,
+emergency:one Char
 }
 
 sig Admin extends Visitor{
-username: one String,
-password: one String
+username: one Strings,
+password: one Strings
 }
 
 //Communication entities
@@ -102,10 +95,7 @@ receiver:one User
 sig Request extends Message{
 maximumWaitingTime: lone Time
 }
-{
-maximumWaitingTime.hours=23
-maximumWaitingTime.minutes=59
-}
+
 
 sig Response extends Message{
 accepted:one Strings,
@@ -113,13 +103,13 @@ estimatedTimeWaiting:one Time
 }
 
 sig Report extends Message{
-reason: one String,
-id:  one String
+reason: one Strings,
+id:  one Strings
 }
 
 
 sig Drive{
-driveId: one String,
+driveId: one Strings,
 userRequest: one Request,
 taxiResponse:one Response,
 reports: set Report
@@ -128,13 +118,14 @@ reports: set Report
 
 //System-related entities
 sig TaxiZone{
-zone id: one String,
+zoneId: one Strings,
+requestQueue: set Request,
 carIdQueue: set CarNumber,
-centerPoint: one Location
+centerPoint: one Location,
+
 }
 
 sig Scheduler{
-requestQueue: set Request
 zones: some TaxiZone
 }
 
@@ -166,77 +157,129 @@ fact noEmptyLocation{
 	all l:Location | (#l.coordinates=1) and (#l.streetName=1) and (#l.streetNumber=1)
 }
 
+//User mandatory fields
+fact noUserMissingInfo{
+		all u:User | (#u.username=1) and (#u.password=1)
+}
 
-fact noPasswordMissingUser{
-		all u:User | (#u.password=1)
+
+//User mandatory fields
+fact noSenderMissing{
+		all m:Message | (#m.sender=1) 
+}
+
+
+
+//Admin mandatory fields
+fact noUsernameMissingAdmin{
+		all a:Admin | (#a.password=1)
 }
 
 fact noPasswordMissingAdmin{
 		all a:Admin | (#a.password=1)
 }
+//
 
-fact noUnlicensedAndCarlessTaxiDriver{
-	all t:TaxiDriver | (#t.carNumber=1) and (#t.licenseNumber=1) and (#t.carModel=1)
+
+
+//Scheduler must have at least one zone
+fact minZones{
+	all s:Scheduler| (#s.zones>1)
 }
+
+
+
+
+
+
+//Taxi driver is eligible if and only if has a car and license number
+fact noUnlicensedAndCarlessTaxiDriver{
+	all t:TaxiDriver | (#t.carId=1) and (#t.licenseNumber=1) and (#t.carModel=1)
+}
+
+
+
 
 //No duplicate and overlap-alike facts
 
 
 
-
-
 //no duplicate usernames
 fact noDuplicateUser{
-	no disj u1,u2: User | (u1.username=u2.username)
+	no  u1,u2: User |(u1!=u2) and  (u1.username=u2.username)
 }
 
-//no possibility for one user to register more than once
+//no possibility for one user to register more than once with a same fiscal code
 
 
 fact noFakeProfiles{
-	no disj u1,u2: User | (u1.codiceFiscale=u2.codiceFiscale)
+	no u1,u2: User | (u1!=u2) and (u1.codiceFiscale=u2.codiceFiscale)
 }
 
 
+//
 
 
-//no self-communication
+
+
+//No self-communication allowed - all the requests,responses and report are towards differnt users
 
 fact noSelfCommunication{
 	all u:User, m:Message | not ( (m.sender=u) and (m.receiver=u) )
 }
 
-//no driving to same destination 
+//No sending requests, responses or reports to same location
 
 fact noSameStartAsEnd{
 	all m:Message | not ( m.startpoint=m.endpoint )
 }
 
-//no same taxi zones with same center points
+
+
+//No taxi zones with same center points
 
 fact noSameZones{
-	no disj z1,z2: TaxiZone | not  (z1.centerPoint=z2.centerPoint)
+	no z1,z2: TaxiZone | (z1!=z2)  and (z1.centerPoint=z2.centerPoint)
 }
 
-//no two taxi drivers with same car
+//No taxi zones with same ids
+
+fact noSameIdZones{
+	no  z1,z2: TaxiZone | (z1!=z2) and  (z1.zoneId=z2.zoneId)
+}
+
+
+
+//No car number belonging to different owners at the same time
+//fact noSameCarOwner{
+	//no  cn1, cn2: CarNumber | (cn1!=cn2) and  (cn1.owner=cn2.owner)
+//}
+
+fact noSameCarNumbers{
+	no  cn1, cn2: CarNumber | (cn1!=cn2) and (cn1.id=cn2.id)
+}
+
+
+
+
+//No two taxi drivers with same car
 fact noSameDriverCars{
-	no disj td1, td2: TaxiDriver | not (z1.carId=z2.carId)
+	no td1, td2: TaxiDriver | (td1!=td2) and  (td1.carId=td2.carId)
 }
 
-//no taxi drivers with same liense id allowed
+//No taxi drivers with same license id allowed
 fact noSameLicense{
-	no disj td1,td2: TaxiDriver | not (td1.licenseNumber=td2.licenseNumber)
+	no  td1,td2: TaxiDriver | (td1!=td2) and  (td1.licenseNumber=td2.licenseNumber)
 }
 
-//no two drives with same ids
+//No two drives with same ids
 
 fact noSameDriveId{
-	no disj d1,d2: Drive | not (drive1.driveId=d2.driveId)
+	no d1,d2: Drive | (d1!=d2) and (d1.driveId=d2.driveId)
 }
 
 
-//a taxi drivers can respond to requests that are from users in that taxizone
-
+//A taxi drivers can respond to requests that are from users in that taxi zone
 
 fact responseCondition1{
 no r:Request | r.sender. currentZone!=r.receiver.currentZone
@@ -246,35 +289,196 @@ fact responseCondition2{
 no r:Response | r.sender. currentZone!=r.receiver.currentZone
 }
 
+//No two requests from same sender can be in one queue of request per taxi zone
 
-
-
-//no longer estimated time in response than time proposed in a request. this can't be a drive formed event
-
-fact timesCondition {
- no d: Drive | (d.userRequest.maximumWaitingTime.minutes) < (d.taxiResponse.estimatedTimeWaiting.minutes)
-}
-
-//since we assume that the areas are at most 2km square each, we won't allow waiting times in hours in this case
-
-fact timesCondition2{
-no d:Drive | (d.userRequest.maximumWaitingTime.hours>0)
+fact noTwoZonesSameSender{
+ no r1,r2:Request | some z:TaxiZone|
+ r1!=r2 and (r1 in z.requestQueue) and
+ (r2 in z.requestQueue) and (r1.sender=r2.receiver)
 }
 
 
-fact timesCondition3{
-no d:Drive | (d.taxiResponse.estimatedTimeWaiting.hours>0)
+//One request can't belong to queues of two different taxi zones at the same time
+
+fact noTwoZonesSameRequest{
+ no r: Request | some z1, z2:TaxiZone |
+ z1!=z2 and (r in z1.requestQueue) and
+ (r in z2.requestQueue)
 }
 
 
 
 
 
-//no one taxi in two different taxi zones
+//Are always the right actors reported in a drive
+fact driveReportsRule{
+all d:Drive,r:Report| (r in d.reports) and (   (r.sender =d.userRequest.sender) or (r.sender=d.userRequest.receiver)    )
+}
 
+//The condition when a drive is considered correct
+fact correctDrive{
+all d:Drive| (d.userRequest.sender = d.taxiResponse.receiver)
+}
+
+
+
+
+
+//One taxi can't belong to queues of two different taxi zones
 fact oneTaxiCanOnlyBeInOneTaxiZone {
  no t: TaxiDriver | some z1, z2:TaxiZone |
  z1!=z2 and (t.carId in z1.carIdQueue) and
  (t.carId in z2.carIdQueue)
 }
+
+
+
+//All zones belong to one scheduler per city
+
+fact allBelong{
+all t:TaxiZone| some s:Scheduler| (t in s.zones)
+}
+
+
+
+
+//3. ASSERTS
+
+//Checking if there are  same requests in two zones
+assert NoTwoZonesSameRequest{
+ no r: Request | some z1, z2:TaxiZone |
+ z1!=z2 and (r in z1.requestQueue) and
+ (r in z2.requestQueue)
+}
+check NoTwoZonesSameRequest for 5
+
+
+//Checking if there is no self-message
+
+assert NoSelfMessage{
+ no m: Message | m.sender=m.receiver
+}
+check NoSelfMessage for 5
+
+
+
+
+
+//Checking add request
+assert addRequest{
+all r:Request, t1:TaxiZone,t2:TaxiZone | (r not in t1.requestQueue) and  addRequestToTaxiZone[r,t1,t2] implies (r in t2.requestQueue)
+}
+
+check addRequest for 5
+
+assert deleteRequest{
+all r:Request, t1:TaxiZone,t2:TaxiZone | (r  in t1.requestQueue) and  removeRequestFromTaxiZone[r,t1,t2] implies (r not in t2.requestQueue)
+}
+check addRequest for 5
+
+//Are always the right actors reported in a drive
+assert driveReports{
+all d:Drive,r:Report| (r in d.reports) and (   (r.sender =d.userRequest.sender) or (r.sender=d.userRequest.receiver))
+}
+check driveReports for 5
+
+
+
+
+
+//DriveRule
+assert driveRule{
+all d:Drive| (d.userRequest.sender = d.taxiResponse.receiver)
+}
+check driveRule for 5
+
+
+
+//Should find counterexample!- Simulating a situation where two taxi drivers register with same car
+//A trivially false assert will result in counterexamples being found when it is checked. 
+//Since anything makes such an assertion false, any example of the system will be a counterexample. 
+assert assignSame1{
+all cn:CarNumber, t1,t2,t3,t4:TaxiDriver| AssignCarNumber [cn, t1, t2] and AssignCarNumber [cn,t3,t4]
+}
+check assignSame1 for 10
+
+
+
+//Shouldn't find a counterexample this time
+assert assignSame2{
+all cn:CarNumber, t1,t2,t3,t4:TaxiDriver| AssignCarNumber [cn, t1, t2] and AssignCarNumber [cn, t3, t4] implies (t4=t2)
+}
+check assignSame2 for 10
+
+//Should illustrate that it is not possible to send message with same sender and receiver 
+//It prevents respond the request of yourself
+
+assert sameReceiver{
+all m1,m2,m3,m4:Message,u:User | AssignReceiver[m1,m2,u] and AssignReceiver[m3,m4,u]
+}
+check sameReceiver for 5
+
+//4. PREDICATES
+
+//To genrate world example
+pred show(){
+#User=2
+#TaxiDriver=2
+#Guest=2
+#Drive=2
+#Strings=2
+#Char=2
+#Integer=2
+#Time=2
+#Date=2
+#TimeDate=2
+#Request=2
+#Response=2
+#Location=3
+#Scheduler=1
+#TaxiZone=2
+#CarNumber=2
+}
+run show for 5
+
+
+
+
+//Adding request to a taxi zone
+pred addRequestToTaxiZone(r:Request, t1,t2:TaxiZone)
+{
+r not in t1.requestQueue implies t2.requestQueue=t1.requestQueue+r
+}
+run addRequestToTaxiZone for 5
+
+//Removing request from a taxi zone
+pred removeRequestFromTaxiZone(r:Request, t1,t2:TaxiZone)
+{
+t2.requestQueue=t1.requestQueue-r
+}
+run removeRequestFromTaxiZone for 5
+
+
+//Assigning taxi driver a car number
+pred  AssignCarNumber(cn:CarNumber, td1,td2:TaxiDriver)
+{
+td2.carId=td1.carId+cn
+}
+run AssignCarNumber for 5
+
+
+//Simulating how system assign recevier from schedule
+pred AssignReceiver(m1,m2:Message,u:User)
+{
+m2.receiver=m1.receiver+u
+}
+run AssignReceiver for 5
+
+
+
+
+
+
+
+
 
