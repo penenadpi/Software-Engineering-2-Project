@@ -221,7 +221,7 @@
 <XPD:REF name="Incomings[0]">xFAWveI0sU+tJhZHhW4BkwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Subvertices[14]" type="UMLActionState" guid="x4CUn/GgZEKnmXYcAkPfnQAA">
-<XPD:ATTR name="Name" type="string">Send positive response to userwith offer</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Send positive response to user with offer</XPD:ATTR>
 <XPD:REF name="ContainerState">wB5jLIoDhEyuGrCvotzaYAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">1</XPD:ATTR>
 <XPD:REF name="Views[0]">HieNtUPUNUW607ztQzwLKAAA</XPD:REF>
@@ -637,13 +637,13 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">252</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">588</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">216</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">584</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">219</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">40</XPD:ATTR>
 <XPD:REF name="Model">x4CUn/GgZEKnmXYcAkPfnQAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="+DO3BM/wxE2YTwXRUDwdvAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="nna1654tfUKL0hNiTBrn7QAA">
-<XPD:ATTR name="Text" type="string">Send positive response to userwith offer</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Send positive response to user with offer</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="2OumZk0t/kyAiM4A8sEjpwAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -656,7 +656,7 @@
 <XPD:OBJ name="OwnedViews[16]" type="UMLTransitionView" guid="E2tlxC8tbkWxIAAcGYAk/wAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">356,521;358,588</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">357,521;360,584</XPD:ATTR>
 <XPD:REF name="Model">S5h8J422PEG9WYMvB5bbyAAA</XPD:REF>
 <XPD:REF name="Head">HieNtUPUNUW607ztQzwLKAAA</XPD:REF>
 <XPD:REF name="Tail">nTZ+joYDIU6bWGtE3khWpQAA</XPD:REF>
@@ -1060,7 +1060,7 @@
 <XPD:OBJ name="OwnedViews[34]" type="UMLTransitionView" guid="u2crYd7ua02XoAEZs1XhHQAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">365,627;376,668</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">366,623;377,668</XPD:ATTR>
 <XPD:REF name="Model">wMeMvvY560eZkRHBFMBn8gAA</XPD:REF>
 <XPD:REF name="Head">0RWM1svKTUiYHHJOeWsg9gAA</XPD:REF>
 <XPD:REF name="Tail">HieNtUPUNUW607ztQzwLKAAA</XPD:REF>

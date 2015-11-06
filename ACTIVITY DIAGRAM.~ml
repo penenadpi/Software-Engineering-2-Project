@@ -1067,7 +1067,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="S+bdlmHVYEOuwSl+ko4GHAAA">
 <XPD:ATTR name="Alpha" type="real">0,569952289836723</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">101,316336293808</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">[offer accepte]</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">[offer accepted]</XPD:ATTR>
 <XPD:REF name="Model">wMeMvvY560eZkRHBFMBn8gAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="EdgeLabelView" guid="NkaAowk/dk2v3McBL//zjAAA">
@@ -1382,7 +1382,7 @@
 <XPD:REF name="Views[3]">mRuuRexNf0Gu6sqnUkrdTwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Transitions[30]" type="UMLTransition" guid="wMeMvvY560eZkRHBFMBn8gAA">
-<XPD:ATTR name="Name" type="string">[offer accepte]</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">[offer accepted]</XPD:ATTR>
 <XPD:REF name="StateMachine">kY9P8zdY8E2gESBPHBNu9gAA</XPD:REF>
 <XPD:REF name="Source">x4CUn/GgZEKnmXYcAkPfnQAA</XPD:REF>
 <XPD:REF name="Target">LQq8js2V+E++W2oLZA4xLgAA</XPD:REF>

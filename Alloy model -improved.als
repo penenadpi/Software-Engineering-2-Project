@@ -19,32 +19,22 @@
 sig Time{
 hours: one Int,
 minutes: one Int
-}{
-hours>=0
-hours<24
-minutes>=0
-minutes<60
 }
-
 sig Date{
 day: one Int,
 month: one Int,
 year: one Int
-}{
-day>0
-day<=31
-month>0
-month<=12
 }
 
 sig TimeDate{
 timeStamp: one Time,
-dayStamp: one Date
+dateStamp: one Date
 }
 
 sig Location {
 coordinates: one String,
 streetName: one String,
+streetNumber:one Int,
 number:one Int
 }
 
@@ -67,7 +57,7 @@ lastname: one String,
 username:one String,
 password:one String,
 mobilephoneNumber: one String,
-gender: one Character,
+gender: one String,
 picturePath: one String,
 currentLocation:one Location,
 currentZone:one TaxiZone,
@@ -76,7 +66,7 @@ codiceFiscale: one String
 
 
 sig TaxiDriver extends User{
-carId:one CarNumber,
+carNumber:one CarNumber,
 licenseNumber:one String,
 carModel:one String,
 availability:one String,
@@ -108,7 +98,7 @@ maximumWaitingTime.minutes=59
 }
 
 sig Response extends Message{
-accepted:one Strings,
+accepted:one String,
 estimatedTimeWaiting:one Time
 }
 
@@ -128,13 +118,13 @@ reports: set Report
 
 //System-related entities
 sig TaxiZone{
-zone id: one String,
+zoneId: one String,
 carIdQueue: set CarNumber,
 centerPoint: one Location
 }
 
 sig Scheduler{
-requestQueue: set Request
+requestQueue: set Request,
 zones: some TaxiZone
 }
 
@@ -220,7 +210,7 @@ fact noSameZones{
 
 //no two taxi drivers with same car
 fact noSameDriverCars{
-	no disj td1, td2: TaxiDriver | not (z1.carId=z2.carId)
+	no disj td1, td2: TaxiDriver | not (td1.carNumber=td2.carNumber)
 }
 
 //no taxi drivers with same liense id allowed
@@ -231,7 +221,7 @@ fact noSameLicense{
 //no two drives with same ids
 
 fact noSameDriveId{
-	no disj d1,d2: Drive | not (drive1.driveId=d2.driveId)
+	no disj d1,d2: Drive | not (d1.driveId=d2.driveId)
 }
 
 
@@ -274,7 +264,14 @@ no d:Drive | (d.taxiResponse.estimatedTimeWaiting.hours>0)
 
 fact oneTaxiCanOnlyBeInOneTaxiZone {
  no t: TaxiDriver | some z1, z2:TaxiZone |
- z1!=z2 and (t.carId in z1.carIdQueue) and
- (t.carId in z2.carIdQueue)
+ z1!=z2 and (t.carNumber in z1.carIdQueue) and
+ (t.carNumber in z2.carIdQueue)
 }
 
+
+pred show{
+
+#Location=4
+}
+
+run show for 15
